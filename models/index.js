@@ -21,7 +21,7 @@ Product.belongsToMany(Tag, {
     model: 'product_tag',
     unique: false,
   },
-  as: 'linked_tags',
+  as: 'linked_tag',
 });
 
 // Tags belongToMany Products (through ProductTag) - Complete
