@@ -66,7 +66,6 @@ router.post('/', (req, res) => {
       res.status(400).json(err);
     });
 });
-console.log(req.body);
 
 // update product
 router.put('/:id', (req, res) => {
