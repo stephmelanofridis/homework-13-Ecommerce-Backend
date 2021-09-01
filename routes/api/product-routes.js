@@ -66,6 +66,7 @@ router.post('/', (req, res) => {
       res.status(400).json(err);
     });
 });
+console.log(req.body);
 
 // update product
 router.put('/:id', (req, res) => {
@@ -109,7 +110,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value - Complete
   try {
     const productData = await Product.destroy({
