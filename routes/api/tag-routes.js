@@ -8,10 +8,11 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data - Complete
   try {
     const tagData = await Tag.findAll({
-      include: [{ model: Product, through: ProductTag, as: 'linked_tag' }]
+      include: [{ model: Product, through: ProductTag, as: 'linked_products' }]
     });
     res.status(200).json(tagData);
   } catch (err) {
+    console.log(err);
     res.status(400).json(err);
   };
 });
@@ -20,8 +21,8 @@ router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data - Complete
   try {
-    const tagData = await Tag.findByPk({
-      include: [{ model: Product, through: ProductTag, as: 'linked_tag' }]
+    const tagData = await Tag.findByPk(req.params.id, {
+      include: [{ model: Product, through: ProductTag, as: 'linked_products' }]
     });
     if (!tagData) {
       res.status(404).json({ message: 'No match with this ID. Please try again.' });
@@ -42,7 +43,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value - Complete
   try {
-    const tagData = await Tag.update({
+    const tagData = await Tag.update(req.body, {
       where: {
         id: req.params.id,
       },
